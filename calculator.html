@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Pocket Calculator</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/calculator.css"/>
+
+    <!-- JavaScript -->
+    <script type="text/javascript" src="js/calculator.js"></script>
+  </head>
+
+  <body>
+
+    <div class="calculator">
+      <div style="text-align: center;">
+        <table>
+          <tr>
+            <td colspan="4" rowspan="2" id="output">0</td>
+          </tr>
+          <tr>
+          </tr>
+          <tr>
+            <td onclick="clear();" id="button">AC</td>
+            <td onclick="negation();" id="button">+/-</td>
+            <td onclick="percent();" id="button">%</td>
+            <td onclick="divide();" id="operator">÷</td>
+          </tr>
+          <tr>
+            <td onclick="seven();" id="button">7</td>
+            <td onclick="eight();" id="button">8</td>
+            <td onclick="nine();" id="button">9</td>
+            <td onclick="multiply();" id="operator">×</td>
+          </tr>
+          <tr>
+            <td onclick="four();" id="button">4</td>
+            <td onclick="five();" id="button">5</td>
+            <td onclick="six();" id="button">6</td>
+            <td onclick="minus();" id="operator">-</td>
+          </tr>
+          <tr>
+            <td onclick="one();" id="button">1</td>
+            <td onclick="two();" id="button">2</td>
+            <td onclick="three();" id="button">3</td>
+            <td onclick="plus();" id="operator">+</td>
+          </tr>
+          <tr>
+            <td colspan="2" onclick="zero();" id="zero">0</td>
+            <td onclick="decimal();" id="button">.</td>
+            <td onclick="equals();" id="operator">=</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+</html>
