@@ -12,6 +12,10 @@ var scientificNote = 0;
 var operation = 0;
 var decimal = -1;
 var negation = 0;
+var first = 0;
+var temp = 0;
+var z = 0;
+var equals = 0;
 
 //number = 0 (first number)(for numbers)
 //number = 1 (second number)(for numbers)
@@ -23,11 +27,12 @@ var negation = 0;
 //decimal = x (number of decimal places)(for numbers and operators)
 //scienific = 1 (number is exponential / scietific notation)(for numbers)
 //negation = 1 (the number was turned negative)(for numbers)
+//equals = 1 (clears)(for numbers because of equals)
 
 function AC() {
   var ac = document.getElementById("output");
-  ckeck = 0;
   number = 0;
+  check = 0;
   variable1 = 0;
   variable2 = 0;
   variableV1 = 0;
@@ -38,6 +43,10 @@ function AC() {
   operation = 0;
   decimal = -1;
   negation = 0;
+  first = 0;
+  temp = 0;
+  z = 0;
+  equals = 0;
   ac.innerHTML = (`${calculate}`)
 }
 
@@ -131,6 +140,9 @@ function AC() {
 
 function display(z=0) {
   var one = document.getElementById("output");
+  if (equals == 1) {
+    AC();
+  }
   if (negation == 1) {
     AC();
   }
@@ -178,4 +190,60 @@ function display(z=0) {
     one.innerHTML = (`${calculate}`)
   }
 }
+}
+
+//number = 0 (first number)(for numbers)
+//number = 1 (second number)(for numbers)
+//check = 1 (are in decimals and scientific notation should turn off)(for numbers)
+//operation = 1 (the last clicked operator was addition)(for operators & equals)
+//operation = 2 (the last clicked operator was subtraction)(for operators & equals)
+//operation = 3 (the last clicked operator was multiplication)(for operators & equals)
+//operation = 4 (the last clicked operator was division)(for operators & equals)
+//first = 1 (need to perform divide/multiply first then add)(for operators)
+//first = 2 (need to perform divide/multiply first then subtract)(for operators)
+//decimal = x (number of decimal places)(for numbers and operators)
+//scienific = 1 (number is exponential / scietific notation)(for numbers)
+//negation = 1 (the number was turned negative)(for numbers)
+//equals = 1 (clears)(for numbers because of equals)
+
+function decimal() {
+  variableV2 = variableV2 / Math.pow(10, decimal);
+  variable1 = variableV1 / Math.pow(10, decimal);
+}
+
+function operation() {
+  var operate = document.getElementById("output");
+  if (first == 1) {
+    decimal();
+    if (operation == 3) {
+      variable2 = (temp * variableV2);
+      variableV1 = (variableV2 + variableV1);
+      variable1 = variableV1
+      if (variable1.toString().length > 9) {
+        if (calculate.toString().length >= 9 || scientific == 1) {
+        calculate = variable1.toExponential(4)
+      }else {
+      calculate = variable1.toLoaleString();
+    }
+      operate.innerHTML = (`${calculate}`);
+      calculate = variableV2;
+    } else if (operation == 4){
+      variableV2 = (temp * variableV2);
+      variableV1 = (variableV2 + variableV1);
+      variable1 = variableV1
+      calculate = variable1.toLoaleString();
+      operate.innerHTML = (`${calculate}`);
+      calculate = variableV2;
+    }
+  } else if (first == 2) {
+
+  } else if (operation == 1) {
+
+  } else if (operation == 2) {
+
+  } else if (operation == 3) {
+
+  } else if (operation == 4) {
+
+  }
 }
