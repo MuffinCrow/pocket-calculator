@@ -17,6 +17,9 @@ var temp = 0;
 var z = 0;
 var equals = 0;
 
+
+let varb = -0.0000000000000000000000000000000000000000000000000345;
+console.log(varb.toExponential(5))
 //number = 0 (first number)(for numbers)
 //number = 1 (second number)(for numbers)
 //check = 1 (are in decimals and scientific notation should turn off)(for numbers)
@@ -206,9 +209,20 @@ function display(z=0) {
 //negation = 1 (the number was turned negative)(for numbers)
 //equals = 1 (clears)(for numbers because of equals)
 
+function countDecimals(value) {
+    if (Math.floor(value) !== value) {
+        return value.toString().split(".")[1].length || 0;
+    } else {
+    return 0;
+  }
+}
+
 function decimal() {
+  if (number == 0) {
+    variable1 = variableV1 / Math.pow(10, decimal);
+  } else if (number == 1) {
   variableV2 = variableV2 / Math.pow(10, decimal);
-  variable1 = variableV1 / Math.pow(10, decimal);
+  }
 }
 
 function operation() {
@@ -218,12 +232,13 @@ function operation() {
     if (operation == 3) {
       variable2 = (temp * variableV2);
       variableV1 = (variableV2 + variableV1);
-      variable1 = variableV1
-      if (variable1.toString().length > 9) {
-        if (calculate.toString().length >= 9 || scientific == 1) {
-        calculate = variable1.toExponential(4)
+      variable1 = variableV1;
+      calculate = variable1;
+        if ((calculate.toString().length - countDecimals(calculate)) > 9 || countDecimals(calculate) > 9) {
+        calculate = Number(variable1.toExponential(4))
+        number = 1;
       }else {
-      calculate = variable1.toLoaleString();
+        number = 1;
     }
       operate.innerHTML = (`${calculate}`);
       calculate = variableV2;
