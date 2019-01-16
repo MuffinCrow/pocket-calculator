@@ -16,10 +16,10 @@ var first = 0;
 var temp = 0;
 var z = 0;
 var equals = 0;
+var index = [];
+var i = 0;
+var indexOut = [];
 
-
-let varb = -0.0000000000000000000000000000000000000000000000000345;
-console.log(varb.toExponential(5))
 //number = 0 (first number)(for numbers)
 //number = 1 (second number)(for numbers)
 //check = 1 (are in decimals and scientific notation should turn off)(for numbers)
@@ -50,6 +50,9 @@ function AC() {
   temp = 0;
   z = 0;
   equals = 0;
+  index = [];
+  i = 0;
+  indexOut = [];
   ac.innerHTML = (`${calculate}`)
 }
 
@@ -151,45 +154,23 @@ function display(z=0) {
   }
   if (calculate.toString().length < 9) {
   if (decimal >= 0) {
-    if (number == 0) {
       decimal++;
       variableV1 = (variable1 * 10 + z);
       variable1 = variableV1;
       variable1 = variable1 / Math.pow(10, decimal);
       calculate = variable1;
       one.innerHTML = (`${calculate}`)
-    } else if (number == 1) {
-      decimal++;
-      variableV2 = (variable2 * 10 + z);
-      variable2 = variableV12;
-      variable2 = variable2 / Math.pow(10, decimal);
-      calculate = variable2;
-      one.innerHTML = (`${calculate}`)
-    }
   }
   if (calculate.toString().length >= 3) {
-    if (number == 0) {
       variableV1 = (variableV1 * 10 + z);
       variable1 = variableV1;
       calculate = variable1.toLocaleString();
       one.innerHTML = (`${calculate}`)
       calculate = variableV1;
-    } else if (number == 1) {
-      variableV2 = (variableV2 * 10 + z);
-      variable2 = variableV2;
-      calculate = variable2.toLoaleString();
-      one.innerHTML = (`${calculate}`)
-      calculate = variableV2;
-    }
-  } else if (number == 0) {
+  } else{
     variableV1 = (variable1 * 10 + z);
     variable1 = variableV1;
     calculate = variable1;
-    one.innerHTML = (`${calculate}`)
-  } else if (number == 1) {
-    variableV2 = (variable2 * 10 + z);
-    variable2 = variableV2;
-    calculate = variable2;
     one.innerHTML = (`${calculate}`)
   }
 }
@@ -198,67 +179,33 @@ function display(z=0) {
 //number = 0 (first number)(for numbers)
 //number = 1 (second number)(for numbers)
 //check = 1 (are in decimals and scientific notation should turn off)(for numbers)
-//operation = 1 (the last clicked operator was addition)(for operators & equals)
-//operation = 2 (the last clicked operator was subtraction)(for operators & equals)
-//operation = 3 (the last clicked operator was multiplication)(for operators & equals)
-//operation = 4 (the last clicked operator was division)(for operators & equals)
-//first = 1 (need to perform divide/multiply first then add)(for operators)
-//first = 2 (need to perform divide/multiply first then subtract)(for operators)
+//operation = 1 (adds + to the array)(for operators)
+//operation = 2 (adds - to the array)(for operators)
+//operation = 3 (adds * to the array))(for operators)
+//operation = 4 (adds / to the array)(for operators & equals)
+//first = 1 (plus/minus is being clicked)(for operators)
+//first = 2 (divide/multiply is being clicked)(for operators)
 //decimal = x (number of decimal places)(for numbers and operators)
 //scienific = 1 (number is exponential / scietific notation)(for numbers)
 //negation = 1 (the number was turned negative)(for numbers)
 //equals = 1 (clears)(for numbers because of equals)
 
-function countDecimals(value) {
-    if (Math.floor(value) !== value) {
-        return value.toString().split(".")[1].length || 0;
-    } else {
-    return 0;
-  }
-}
+function plus() {
+  first = 1;
+  operation = 1;
+  indexOut = index;
+  one.innerHTML = eval(indexOut.join().replace(/,/g, " "));
 
-function decimal() {
-  if (number == 0) {
-    variable1 = variableV1 / Math.pow(10, decimal);
-  } else if (number == 1) {
-  variableV2 = variableV2 / Math.pow(10, decimal);
-  }
 }
 
 function operation() {
-  var operate = document.getElementById("output");
-  if (first == 1) {
-    decimal();
-    if (operation == 3) {
-      variable2 = (temp * variableV2);
-      variableV1 = (variableV2 + variableV1);
-      variable1 = variableV1;
-      calculate = variable1;
-        if ((calculate.toString().length - countDecimals(calculate)) > 9 || countDecimals(calculate) > 9) {
-        calculate = Number(variable1.toExponential(4))
-        number = 1;
-      }else {
-        number = 1;
-    }
-      operate.innerHTML = (`${calculate}`);
-      calculate = variableV2;
-    } else if (operation == 4){
-      variableV2 = (temp * variableV2);
-      variableV1 = (variableV2 + variableV1);
-      variable1 = variableV1
-      calculate = variable1.toLoaleString();
-      operate.innerHTML = (`${calculate}`);
-      calculate = variableV2;
-    }
-  } else if (first == 2) {
 
-  } else if (operation == 1) {
-
-  } else if (operation == 2) {
-
-  } else if (operation == 3) {
-
-  } else if (operation == 4) {
-
+  if (decimal > 0) {
+    index[i] = variableV1 / Math.pow(10, decimal);
   }
+    index.push(variableV1);
+    i++;
+    variableV1 = 0;
+
+
 }
