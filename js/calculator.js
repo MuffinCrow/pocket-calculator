@@ -38,11 +38,7 @@ function AC() {
   check = 0;
   variable1 = 0;
   variable2 = 0;
-  variableV1 = 0;
-  variableV2 = 0;
   calculate = 0;
-  scientific = 0;
-  scientificNote = 0;
   operation = 0;
   decimal = -1;
   negation = 0;
@@ -56,95 +52,18 @@ function AC() {
   ac.innerHTML = (`${calculate}`)
 }
 
-//function zero() {
-//  var zero = document.getElementById("output");
-//  if (decimal >= 0) {
-//    if (number == 0) {
-//      decimal++;
-//      variableV1 = (variable1 * 10);
-//      variable1 = variableV1;
-//      variable1 = variable1 / Math.pow(10, decimal);
-//      calculate = variable1;
-//      zero.innerHTML = (`${calculate}`)
-//    } else if (number == 1) {
-//      decimal++;
-//      variableV2 = (variable2 * 10);
-//      variable2 = variableV12;
-//      variable2 = variable2 / Math.pow(10, decimal);
-//      calculate = variable2;
-//      zero.innerHTML = (`${calculate}`)
-//    }
-//  } else if (calculate.toString().length >= 9 || scientific == 1) {
-//    if (number == 0) {
-//      scientific = 1;
-//      variableV1 = (variableV1 * 10);
-//      variable1 = variableV1;
-//      variable1 = variable1.toExponential(4)
-//      calculate = variable1;
-//      zero.innerHTML = (`${calculate}`)
-//      calculate = variableV1
-//    } else if (number == 1) {
-//      scientific = 1;
-//      variableV2 = (variableV2 * 10);
-//      variable2 = variableV2;
-//      variable2 = variable2.toExponential(4)
-//      calculate = variable2;
-//      zero.innerHTML = (`${calculate}`)
-//      calculate = variableV2
-//    }
-//  } else if (calculate.toString().length >= 3 && calculate.toString().length < 9) {
-//    if (number == 0) {
-//      variableV1 = (variableV1 * 10);
-//      variable1 = variableV1;
-//      calculate = variable1.toLocaleString();
-//      zero.innerHTML = (`${calculate}`)
-//      calculate = variableV1;
-//    } else if (number == 1) {
-//      variableV2 = (variableV2 * 10);
-//      variable2 = variableV2;
-//      calculate = variable2.toLoaleString();
-//      zero.innerHTML = (`${calculate}`)
-//      calculate = variableV2;
-//    }
-//  } else if (number == 0) {
-//    variableV1 = (variable1 * 10);
-//    variable1 = variableV1;
-//    calculate = variable1;
-//    zero.innerHTML = (`${calculate}`)
-//  } else if (number == 1) {
-//    variableV2 = (variable2 * 10);
-//    variable2 = variableV2;
-//    calculate = variable2;
-//    zero.innerHTML = (`${calculate}`)
-//}
-//}
-
-//if (calculate.toString().length >= 9 || scientific == 1) {
-//  if (number == 0) {
-//    scientific = 1;
-//    variableV1 = (variableV1 * 10 + z);
-//    variable1 = variableV1;
-//    variable1 = variable1.toExponential(4)
-//    calculate = variable1;
-//    one.innerHTML = (`${calculate}`)
-//    calculate = variableV1
-//  } else if (number == 1) {
-//    scientific = 1;
-//    variableV2 = (variableV2 * 10 + z);
-//    variable2 = variableV2;
-//    variable2 = variable2.toExponential(4)
-//    calculate = variable2;
-//    one.innerHTML = (`${calculate}`)
-//    calculate = variableV2
-//  }
-
-
-
-
-
-
-
 function display(z=0) {
+  if (operation == 1) {
+    index.push("+");
+    i++;
+  } else if (operation == 2) {
+    index.push("-")
+    i++;
+  } else if (operation == 3) {
+
+  } else if (operation == 4) {
+
+  }
   var one = document.getElementById("output");
   if (equals == 1) {
     AC();
@@ -174,6 +93,8 @@ function display(z=0) {
     one.innerHTML = (`${calculate}`)
   }
 }
+console.log(variableV1);
+console.log(calculate);
 }
 
 //number = 0 (first number)(for numbers)
@@ -193,19 +114,57 @@ function display(z=0) {
 function plus() {
   first = 1;
   operation = 1;
-  indexOut = index;
-  one.innerHTML = eval(indexOut.join().replace(/,/g, " "));
-
-}
-
-function operation() {
-
   if (decimal > 0) {
     index[i] = variableV1 / Math.pow(10, decimal);
   }
     index.push(variableV1);
     i++;
     variableV1 = 0;
+    variable1 = 0;
+  indexOut = index;
+  indexOut = indexOut.join();
+  indexOut = indexOut.replace(/,/g, " ");
+  indexOut = eval(indexOut);
+  var b = indexOut.toString().length;
 
+  if (b >= 10 && decimal > 0) {
+    indexOut = indexOut.toExponential(4);
+  } else if (b > 9) {
+    indexOut = indexOut.toExponential(4);
+  } else if (b > 3) {
+    indexOut = indexOut.toLocaleString();
+  }
 
+  var one = document.getElementById("output");
+  one.innerHTML = indexOut;
+  calculate = 0;
+}
+
+function minus() {
+  first = 2;
+  operation = 2;
+  if (decimal > 0) {
+    index[i] = variableV1 / Math.pow(10, decimal);
+  }
+    index.push(variableV1);
+    i++;
+    variableV1 = 0;
+    variable1 = 0;
+  indexOut = index;
+  indexOut = indexOut.join();
+  indexOut = indexOut.replace(/,/g, " ");
+  indexOut = eval(indexOut);
+  var b = indexOut.toString().length;
+
+  if (b >= 10 && decimal > 0) {
+    indexOut = indexOut.toExponential(4);
+  } else if (b > 9) {
+    indexOut = indexOut.toExponential(4);
+  } else if (b > 3) {
+    indexOut = indexOut.toLocaleString();
+  }
+
+  var one = document.getElementById("output");
+  one.innerHTML = indexOut;
+  calculate = 0;
 }
