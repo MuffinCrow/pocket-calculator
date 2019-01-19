@@ -19,6 +19,8 @@ var equals = 0;
 var index = [];
 var i = 0;
 var indexOut = [];
+var button = 0;
+var b = 0;
 
 //number = 0 (first number)(for numbers)
 //number = 1 (second number)(for numbers)
@@ -49,20 +51,27 @@ function AC() {
   index = [];
   i = 0;
   indexOut = [];
+  button = 0;
   ac.innerHTML = (`${calculate}`)
 }
 
 function display(z=0) {
   if (operation == 1) {
     index.push("+");
-    i++;
+    decimal = -1;
+    button = 0;
   } else if (operation == 2) {
     index.push("-")
-    i++;
+    decimal = -1;
+    button = 0;
   } else if (operation == 3) {
-
+    index.push("*");
+    decimal = -1;
+    button = 0;
   } else if (operation == 4) {
-
+    index.push("/");
+    decimal = -1;
+    button = 0;
   }
   var one = document.getElementById("output");
   if (equals == 1) {
@@ -93,8 +102,6 @@ function display(z=0) {
     one.innerHTML = (`${calculate}`)
   }
 }
-console.log(variableV1);
-console.log(calculate);
 }
 
 //number = 0 (first number)(for numbers)
@@ -115,17 +122,22 @@ function plus() {
   first = 1;
   operation = 1;
   if (decimal > 0) {
-    index[i] = variableV1 / Math.pow(10, decimal);
+    variableV1 = variableV1 / Math.pow(10, decimal);
+    decimal = 0;
   }
+
+  if (button == 0) {
     index.push(variableV1);
-    i++;
+    button = 1;
+  }
+
     variableV1 = 0;
     variable1 = 0;
   indexOut = index;
   indexOut = indexOut.join();
   indexOut = indexOut.replace(/,/g, " ");
   indexOut = eval(indexOut);
-  var b = indexOut.toString().length;
+  b = indexOut.toString().length;
 
   if (b >= 10 && decimal > 0) {
     indexOut = indexOut.toExponential(4);
@@ -144,17 +156,22 @@ function minus() {
   first = 2;
   operation = 2;
   if (decimal > 0) {
-    index[i] = variableV1 / Math.pow(10, decimal);
+    variableV1 = variableV1 / Math.pow(10, decimal);
+    decimal = 0;
   }
+
+  if (button == 0) {
     index.push(variableV1);
-    i++;
+    button = 1;
+  }
+
     variableV1 = 0;
     variable1 = 0;
   indexOut = index;
   indexOut = indexOut.join();
   indexOut = indexOut.replace(/,/g, " ");
   indexOut = eval(indexOut);
-  var b = indexOut.toString().length;
+  b = indexOut.toString().length;
 
   if (b >= 10 && decimal > 0) {
     indexOut = indexOut.toExponential(4);
@@ -167,4 +184,100 @@ function minus() {
   var one = document.getElementById("output");
   one.innerHTML = indexOut;
   calculate = 0;
+}
+
+function multiply() {
+  operation = 3;
+  if (decimal > 0) {
+    variableV1 = variableV1 / Math.pow(10, decimal);
+    decimal = 0;
+  }
+
+  if (button == 0) {
+    index.push(variableV1);
+    button = 1;
+  }
+    variableV1 = 0;
+    variable1 = 0;
+  indexOut = index;
+  b = (indexOut.length - 2);
+  let h = 0;
+
+  if((indexOut[b] == "*") || (indexOut[b] == "/")) {
+      b = indexOut.length;
+      while (h != "+" && h != "-") {
+        b--;
+        h = indexOut[b]
+      }
+    indexOut = indexOut.slice(b+1, indexOut.toString().length);
+    indexOut = indexOut.join();
+    indexOut = indexOut.replace(/,/g, " ");
+    indexOut = eval(indexOut);
+  } else {
+    var y = indexOut.length - 1
+    indexOut = indexOut[y];
+  }
+
+  b = indexOut.toString().length;
+
+  if (b >= 10 && decimal > 0) {
+    indexOut = indexOut.toExponential(4);
+  } else if (b > 9) {
+    indexOut = indexOut.toExponential(4);
+  } else if (b > 3) {
+    indexOut = indexOut.toLocaleString();
+  }
+
+  var one = document.getElementById("output");
+  one.innerHTML = indexOut;
+  calculate = 0;
+  indexOut = index;
+}
+
+function divide() {
+  operation = 4;
+  if (decimal > 0) {
+    variableV1 = variableV1 / Math.pow(10, decimal);
+    decimal = 0;
+  }
+
+  if (button == 0) {
+    index.push(variableV1);
+    button = 1;
+  }
+    variableV1 = 0;
+    variable1 = 0;
+  indexOut = index;
+  b = (indexOut.length - 2);
+  let h = 0;
+
+  if((indexOut[b] == "*") || (indexOut[b] == "/")) {
+      b = indexOut.length;
+      while (h != "+" && h != "-") {
+        b--;
+        h = indexOut[b]
+      }
+    indexOut = indexOut.slice(b+1, indexOut.toString().length);
+    indexOut = indexOut.join();
+    indexOut = indexOut.replace(/,/g, " ");
+    indexOut = eval(indexOut);
+  } else {
+    var y = indexOut.length - 1
+    indexOut = indexOut[y];
+  }
+
+  b = indexOut.toString().length;
+
+  if (b >= 10 && decimal > 0) {
+    indexOut = indexOut.toExponential(4);
+  } else if (b > 9) {
+    indexOut = indexOut.toExponential(4);
+  } else if (b > 3) {
+    indexOut = indexOut.toLocaleString();
+  }
+
+  var one = document.getElementById("output");
+  one.innerHTML = indexOut;
+  calculate = 0;
+  indexOut = index;
 }
