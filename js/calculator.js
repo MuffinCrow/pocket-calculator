@@ -158,7 +158,9 @@ function display(z=0) {
           k = variable1.toString()[b];
           console.log(k);
           if (k == ".") {
-            var temp = variable1.slice(0, b).toLocaleString();
+            var temp = variable1.slice(0, b);
+            temp = Number(temp);
+            temp = temp.toLocaleString();
             console.log(temp);
             console.log(variable1);
             variable1 = (temp + "." + variableV1.toString().slice(b, variableV1.toString().length))
