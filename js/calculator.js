@@ -107,6 +107,12 @@ function display(z=0) {
       decimal++;
       b = variableV1[0];
       if (variableV1 == 0 && decimal == 1) {
+        variableV1 = (variableV1 * 10 + z);
+        console.log("why " + variableV1)
+        variable1 = variableV1;
+        variable1 = variable1 / Math.pow(10, decimal);
+        console.log("what " + variable1)
+      } else if (variableV1 == 0 && decimal == 1 && z == 0) {
         variableV1 = ("0.0");
         variable1 = variableV1;
         isaac = 1
@@ -162,8 +168,14 @@ function display(z=0) {
             temp = Number(temp);
             temp = temp.toLocaleString();
             console.log(temp);
-            console.log(variable1);
+            console.log(variableV1);
+            console.log(variableV1.toString().slice(b, variableV1.toString().length));
+            var o = Math.floor(variableV1 / Math.pow(10, decimal));
+            if (o != 0) {
             variable1 = (temp + "." + variableV1.toString().slice(b, variableV1.toString().length))
+          } else {
+            variable1 = variableV1 / Math.pow(10, decimal);
+          }
             console.log(variable1);
           }
         } while (k != ".")
