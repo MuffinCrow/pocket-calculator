@@ -79,26 +79,31 @@ function display(z=0) {
     decimal = -1;
     button = 0;
     operation = 0;
+    check = 0;
   } else if (operation == 2) {
     index.push("-")
     decimal = -1;
     button = 0;
     operation = 0;
+    check = 0;
   } else if (operation == 3) {
     index.push("*");
     decimal = -1;
     button = 0;
     operation = 0;
+    check = 0;
   } else if (operation == 4) {
     index.push("/");
     decimal = -1;
     button = 0;
     operation = 0;
+    check = 0;
   }
   var one = document.getElementById("output");
 
   if (variableV1.toString().replace(".", "").length < 9) {
   if (decimal >= 0) {
+    console.log("A");
       decimal++;
       b = variableV1[0];
       if (variableV1 == 0 && decimal == 1) {
@@ -110,20 +115,24 @@ function display(z=0) {
         variable1 = variableV1;
         isaac = 1
       } else {
-        console.log("A");
+        console.log("D");
+        console.log(decimal);
       variableV1 = (variableV1 * 10 + z);
       variable1 = variableV1;
       variable1 = variable1 / Math.pow(10, decimal);
-      if (variable1 < 10 && z == 0) {
+      if (variable1 < 10 && z == 0 && check == 0) {
+        console.log("E");
         variable1 = (variable1.toString() + "." + variableV1.toString().slice(1, variableV1.toString().length));
-      } else if (variable1 < 100 && z == 0) {
+      } else if (variable1 < 100 && z == 0 && check == 0) {
+        console.log("F");
         variable1 = (variable1.toString() + "." + variableV1.toString().slice(2, variableV1.toString().length));
-      } else if (variable1 < 1000 && z == 0) {
+      } else if (variable1 < 1000 && z == 0 && check == 0) {
+        console.log("G");
         variable1 = (variable1.toString() + "." + variableV1.toString().slice(3, variableV1.toString().length));
-      } else if (variable1 > 999 && z == 0) {
+      } else if (variable1 > 999 && z == 0 && check == 0) {
+        console.log("C");
         b = variableV1.toString().length;
         var k = 0;
-        console.log("B");
         do {
           console.log("b: " + b);
           b--;
@@ -136,21 +145,30 @@ function display(z=0) {
           }
         } while (k == 0)
       } else {
+        console.log("B");
+        check = 1;
         variable1 = variable1.toLocaleString();
         variable1 = variable1.replace(/,/g, "");
         b = variableV1.toString().length;
+        console.log(b);
         var k = 0;
         do {
           b--;
+          console.log(b);
           k = variable1.toString()[b];
+          console.log(k);
           if (k == ".") {
-            variable1 = variable1.toLocaleString();
-            variable1 = (variable1 + "." + variableV1.toString().slice(b + 1, variableV1.toString().length))
+            var temp = variable1.slice(0, b).toLocaleString();
+            console.log(temp);
+            console.log(variable1);
+            variable1 = (temp + "." + variableV1.toString().slice(b, variableV1.toString().length))
+            console.log(variable1);
           }
         } while (k != ".")
       }
-      calculate = variable1;
-      one.innerHTML = (`${calculate}`)
+//      calculate = variable1;
+//      one.innerHTML = (`${calculate}`)
+
 //      console.log("variableV1: "  + variableV1)
 //      variable1 = variableV1;
 //      variable1 = variable1 / Math.pow(10, decimal);
