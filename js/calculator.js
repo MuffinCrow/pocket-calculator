@@ -61,7 +61,7 @@ function AC() {
 }
 
 function display(z=0) {
-
+console.log(z);
   if (end == 1) {
     AC();
     end = 0;
@@ -105,81 +105,94 @@ function display(z=0) {
   if (decimal >= 0) {
     console.log("A");
       decimal++;
-      b = variableV1[0];
-      if (variableV1 == 0 && decimal == 1) {
-        variableV1 = (variableV1 * 10 + z);
-        console.log("why " + variableV1)
-        variable1 = variableV1;
-        variable1 = variable1 / Math.pow(10, decimal);
-        console.log("what " + variable1)
-      } else if (variableV1 == 0 && decimal == 1 && z == 0) {
-        variableV1 = ("0.0");
-        variable1 = variableV1;
-        isaac = 1
-      } else if (variableV1 == 0) {
-        variableV1 = (variableV1 + z);
-        variable1 = variableV1;
-        isaac = 1
-      } else {
-        console.log("D");
-        console.log(decimal);
-      variableV1 = (variableV1 * 10 + z);
-      variable1 = variableV1;
-      variable1 = variable1 / Math.pow(10, decimal);
-      if (variable1 < 10 && z == 0 && check == 0) {
-        console.log("E");
-        variable1 = (variable1.toString() + "." + variableV1.toString().slice(1, variableV1.toString().length));
-      } else if (variable1 < 100 && z == 0 && check == 0) {
-        console.log("F");
-        variable1 = (variable1.toString() + "." + variableV1.toString().slice(2, variableV1.toString().length));
-      } else if (variable1 < 1000 && z == 0 && check == 0) {
-        console.log("G");
-        variable1 = (variable1.toString() + "." + variableV1.toString().slice(3, variableV1.toString().length));
-      } else if (variable1 > 999 && z == 0 && check == 0) {
-        console.log("C");
-        b = variableV1.toString().length;
-        var k = 0;
-        do {
-          console.log("b: " + b);
-          b--;
-          k = variableV1.toString()[b];
-          if (k != 0) {
-            console.log("k: " + k);
-            console.log("code: " + variableV1.toString().slice(b + 1, variableV1.toString().length))
-            variable1 = variable1.toLocaleString();
-            variable1 = (variable1 + "." + variableV1.toString().slice(b + 1, variableV1.toString().length))
-          }
-        } while (k == 0)
-      } else {
-        console.log("B");
-        check = 1;
+      variableV1 = variableV1.toString();
+      b = Math.floor(Number(variableV1));
+      if (decimal == 1 && z == 0) {
+        variableV1 = variableV1.replace(".0", `.${z}`);
+        variable1 = Number(variableV1);
         variable1 = variable1.toLocaleString();
-        variable1 = variable1.replace(/,/g, "");
-        b = variableV1.toString().length;
-        console.log(b);
-        var k = 0;
+        variable1 = (variable1 + `.${z}`);
+      } else if (decimal == 1 && z != 0) {
+        console.log("B");
+        variableV1 = variableV1.replace(".0", `.${z}`);
+        variable1 = Number(variableV1);
+        variable1 = variable1.toLocaleString();
+        console.log(variable1);
+      } else {
+        console.log("C");
+        variableV1 = (variableV1 + `${z}`)
+        variable1 = variableV1.toLocaleString();
+        console.log("v1 = " + variable1);
+        b = variable1.toString().length;
         do {
           b--;
-          console.log(b);
           k = variable1.toString()[b];
-          console.log(k);
+          console.log(variable1.toString()[b]);
           if (k == ".") {
             var temp = variable1.slice(0, b);
             temp = Number(temp);
             temp = temp.toLocaleString();
-            console.log(temp);
-            console.log(variableV1);
-            console.log(variableV1.toString().slice(b, variableV1.toString().length));
-            var o = Math.floor(variableV1 / Math.pow(10, decimal));
-            if (o != 0) {
-            variable1 = (temp + "." + variableV1.toString().slice(b, variableV1.toString().length))
-          } else {
-            variable1 = variableV1 / Math.pow(10, decimal);
-          }
+            variable1 = (temp + variableV1.toString().slice(b, variableV1.toString().length))
             console.log(variable1);
           }
+          if (b == 0 && k != ".") {
+
+          }
         } while (k != ".")
-      }
+//      } else {
+//        console.log("D");
+//        console.log(decimal);
+//      variableV1 = (variableV1 * 10 + z);
+//      variable1 = variableV1;
+//      variable1 = variable1 / Math.pow(10, decimal);
+//      if (variable1 < 10 && z == 0 && check == 0) {
+//        console.log("E");
+//        variable1 = (variable1.toString() + "." + variableV1.toString().slice(1, variableV1.toString().length));
+//      } else if (variable1 < 100 && z == 0 && check == 0) {
+//        console.log("F");
+//        variable1 = (variable1.toString() + "." + variableV1.toString().slice(2, variableV1.toString().length));
+//      } else if (variable1 < 1000 && z == 0 && check == 0) {
+//        console.log("G");
+//        variable1 = (variable1.toString() + "." + variableV1.toString().slice(3, variableV1.toString().length));
+//      } else if (variable1 > 999 && z == 0 && check == 0) {
+//        console.log("C");
+//        b = variableV1.toString().length;
+//        var k = 0;
+//      do {
+//          console.log("b: " + b);
+//          b--;
+//          k = variableV1.toString()[b];
+//          if (k != 0) {
+//            console.log("k: " + k);
+//            console.log("code: " + variableV1.toString().slice(b + 1, variableV1.toString().length))
+//            variable1 = variable1.toLocaleString();
+//            variable1 = (variable1 + "." + variableV1.toString().slice(b + 1, variableV1.toString().length))
+//          }
+//        } while (k == 0)
+//      } else {
+//        console.log("B");
+//        check = 1;
+//        variable1 = variable1.toLocaleString();
+//        variable1 = variable1.replace(/,/g, "");
+//        b = variableV1.toString().length;
+//        var k = 0;
+//        do {
+//          b--;
+//          k = variable1.toString()[b];
+//          if (k == ".") {
+//            var temp = variable1.slice(0, b);
+//            temp = Number(temp);
+//            temp = temp.toLocaleString();
+//            var o = Math.floor(variableV1 / Math.pow(10, decimal));
+//            if (o != 0) {
+//            variable1 = (temp + "." + variableV1.toString().slice(b, variableV1.toString().length))
+//          } else {
+//            variable1 = variableV1 / Math.pow(10, decimal);
+//          }
+//            console.log(variable1);
+//          }
+//        } while (k != ".")
+
 //      calculate = variable1;
 //      one.innerHTML = (`${calculate}`)
 
@@ -259,12 +272,6 @@ function plus() {
   console.log("v1 is " + variableV1);
   first = 1;
   operation = 1;
-  if (decimal >= 0 && isaac != 1) {
-    variableV1 = variableV1 / Math.pow(10, decimal);
-    decimal = -1;
-  }
-  isaac = 0;
-variableV1 = variableV1.toString();
 
   if (button == 0) {
     index.push(variableV1.toString());
@@ -274,30 +281,37 @@ variableV1 = variableV1.toString();
   indexOut = index;
   console.log(index);
   console.log(indexOut);
-    variableV1 = 0;
-    variable1 = 0;
     if (end == 1) {
       end = 0;
       indexout = Number(indexOut);
     } else {
+    console.log("join");
     indexOut = indexOut.join();
     indexOut = indexOut.replace(/,/g, " ");
     indexOut = eval(indexOut);
     }
 
-    var k = Math.floor(indexOut);
-    b = indexOut.toString().length;
+    b = indexOut.toString().replace(".", "").length;
 
-    if (k != indexOut) {
-      if (indexOut.toString().length > 9) {
-        let whole = k.toString().length;
-        whole = (9 - whole);
-        indexOut = indexOut.toFixed(whole);
-      }
-    } else if (b >= 10 && decimal > 0) {
+    if (b > 10 && decimal > 0) {
       indexOut = indexOut.toExponential(4);
     } else if (b > 9) {
       indexOut = indexOut.toExponential(4);
+    } else if (b > 3 && decimal > 0) {
+      var localOut = indexOut
+      indexOut = indexOut.toString();
+      b = indexOut.toString().length;
+      console.log("indexOut = " + indexOut);
+      do {
+        b--;
+        k = indexOut.toString()[b];
+        if (k == ".") {
+          var temp = indexOut.slice(0, b);
+          temp = temp.toLocaleString();
+          indexOut = (temp + localOut.toString().slice(b, localOut.toString().length));
+          console.log(indexOut);
+        }
+      } while (k != ".")
     } else if (b > 3) {
       indexOut = indexOut.toLocaleString();
     }
@@ -305,6 +319,8 @@ variableV1 = variableV1.toString();
   var one = document.getElementById("output");
   one.innerHTML = indexOut;
   calculate = 0;
+  variableV1 = 0;
+  variable1 = 0;
 }
 }
 
@@ -319,48 +335,49 @@ function minus() {
     end = 1;
   } else {
   variableV1 = Number(variableV1);
-  first = 2;
+  console.log("v1 is " + variableV1);
+  first = 1;
   operation = 2;
-  if (decimal >= 0 && isaac != 1) {
-    variableV1 = variableV1 / Math.pow(10, decimal);
-    decimal = -1;
-  }
-  isaac = 0;
-variableV1 = variableV1.toString();
 
   if (button == 0) {
     index.push(variableV1.toString());
     button = 1;
   }
 
-    indexOut = index;
-    console.log(index);
-    console.log(indexOut);
-    variableV1 = 0;
-    variable1 = 0;
+  indexOut = index;
+  console.log(index);
+  console.log(indexOut);
     if (end == 1) {
       end = 0;
       indexout = Number(indexOut);
     } else {
+    console.log("join");
     indexOut = indexOut.join();
     indexOut = indexOut.replace(/,/g, " ");
     indexOut = eval(indexOut);
     }
 
+    b = indexOut.toString().replace(".", "").length;
 
-    var k = Math.floor(indexOut);
-    b = indexOut.toString().length;
-
-    if (k != indexOut) {
-      if (indexOut.toString().length > 9) {
-        let whole = k.toString().length;
-        whole = (9 - whole);
-        indexOut = indexOut.toFixed(whole);
-      }
-    } else if (b >= 10 && decimal > 0) {
+    if (b > 10 && decimal > 0) {
       indexOut = indexOut.toExponential(4);
     } else if (b > 9) {
       indexOut = indexOut.toExponential(4);
+    } else if (b > 3 && decimal > 0) {
+      var localOut = indexOut
+      indexOut = indexOut.toString();
+      b = indexOut.toString().length;
+      console.log("indexOut = " + indexOut);
+      do {
+        b--;
+        k = indexOut.toString()[b];
+        if (k == ".") {
+          var temp = indexOut.slice(0, b);
+          temp = temp.toLocaleString();
+          indexOut = (temp + localOut.toString().slice(b, localOut.toString().length));
+          console.log(indexOut);
+        }
+      } while (k != ".")
     } else if (b > 3) {
       indexOut = indexOut.toLocaleString();
     }
@@ -368,6 +385,8 @@ variableV1 = variableV1.toString();
   var one = document.getElementById("output");
   one.innerHTML = indexOut;
   calculate = 0;
+  variableV1 = 0;
+  variable1 = 0;
 }
 }
 
@@ -382,18 +401,12 @@ function multiply() {
     end = 1;
   } else {
   operation = 3;
-  if (decimal >= 0 && isaac != 1) {
-    variableV1 = variableV1 / Math.pow(10, decimal);
-    decimal = -1;
-  }
-  isaac = 0;
-variableV1 = variableV1.toString();
+
   if (button == 0) {
     index.push(variableV1.toString());
     button = 1;
   }
-    variableV1 = 0;
-    variable1 = 0;
+
     indexOut = index;
     console.log(index);
     console.log(indexOut);
@@ -430,19 +443,30 @@ variableV1 = variableV1.toString();
   }
   end = 0;
 
-  var k = Math.floor(indexOut);
-  b = indexOut.toString().length;
+  indexOut = Number(indexOut);
 
-  if (k != indexOut) {
-    if (indexOut.toString().length > 9) {
-      let whole = k.toString().length;
-      whole = (9 - whole);
-      indexOut = indexOut.toFixed(whole);
-    }
-  } else if (b >= 10 && decimal > 0) {
+  var k = Math.floor(indexOut);
+  b = indexOut.toString().replace(".", "").length;
+
+  if (b > 10 && decimal > 0) {
     indexOut = indexOut.toExponential(4);
   } else if (b > 9) {
     indexOut = indexOut.toExponential(4);
+  } else if (b > 3 && decimal > 0) {
+    var localOut = indexOut
+    indexOut = indexOut.toString();
+    b = indexOut.toString().length;
+    console.log("indexOut = " + indexOut);
+    do {
+      b--;
+      k = indexOut.toString()[b];
+      if (k == ".") {
+        var temp = indexOut.slice(0, b);
+        temp = temp.toLocaleString();
+        indexOut = (temp + localOut.toString().slice(b, localOut.toString().length));
+        console.log(indexOut);
+      }
+    } while (k != ".")
   } else if (b > 3) {
     indexOut = indexOut.toLocaleString();
   }
@@ -451,6 +475,8 @@ variableV1 = variableV1.toString();
   calculate = 0;
   console.log(index);
   console.log(indexOut);
+  variableV1 = 0;
+  variable1 = 0;
 }
 }
 
@@ -465,25 +491,20 @@ function divide() {
     end = 1;
   } else {
   operation = 4;
-  if (decimal >= 0 && isaac != 1) {
-    variableV1 = variableV1 / Math.pow(10, decimal);
-    decimal = -1;
-  }
-  isaac = 0;
-variableV1 = variableV1.toString();
+
   if (button == 0) {
     index.push(variableV1.toString());
     button = 1;
   }
-    variableV1 = 0;
-    variable1 = 0;
+
     indexOut = index;
     console.log(index);
     console.log(indexOut);
   b = (indexOut.length - 2);
+  console.log("A");
   var h = 0;
   var slicey = 0;
-  if(((indexOut[b] == "*") || (indexOut[b] == "/")) && indexOut.length > 3) {
+  if(((indexOut[b] == "*") || (indexOut[b] == "/")) && indexOut.length >= 3) {
       b = indexOut.length;
       while (h != "+" && h != "-") {
         b--;
@@ -512,27 +533,40 @@ variableV1 = variableV1.toString();
   }
   end = 0;
 
-  var k = Math.floor(indexOut);
-  b = indexOut.toString().length;
+  indexOut = Number(indexOut);
 
-  if (k != indexOut) {
-    if (indexOut.toString().length > 9) {
-      let whole = k.toString().length;
-      whole = (9 - whole);
-      indexOut = indexOut.toFixed(whole);
-    }
-  } else if (b >= 10 && decimal > 0) {
+  var k = Math.floor(indexOut);
+  b = indexOut.toString().replace(".", "").length;
+
+  if (b > 10 && decimal > 0) {
     indexOut = indexOut.toExponential(4);
   } else if (b > 9) {
     indexOut = indexOut.toExponential(4);
-  } else if (b > 3) {
-    indexOut = indexOut.toLocaleString();
-  }
+  } else if (b > 3 && decimal > 0) {
+    var localOut = indexOut
+    b = indexOut.toString().length;
+    console.log("indexOut = " + indexOut);
+    do {
+      b--;
+      indexOut = indexOut.toString();
+      k = indexOut.toString()[b];
+      if (k == ".") {
+        var temp = indexOut.slice(0, b);
+        temp = temp.toLocaleString();
+        indexOut = (temp + localOut.toString().slice(b, localOut.toString().length));
+        console.log(indexOut);
+      }
+    } while (k != ".")
+    }else if (b > 3) {
+     indexOut = indexOut.toLocaleString();
+   }
   var one = document.getElementById("output");
   one.innerHTML = indexOut;
   calculate = 0;
   console.log(index);
   console.log(indexOut);
+  variableV1 = 0;
+  variable1 = 0;
 }
 }
 
@@ -547,11 +581,7 @@ function result() {
     end = 1;
   } else {
   if (button == 0) {
-    if (decimal >= 0 && isaac != 1) {
-      variableV1 = variableV1 / Math.pow(10, decimal);
-      decimal = -1;
-    }
-    isaac = 0;
+    console.log(variableV1);
     variableV1 = Number(variableV1);
     index.push(variableV1.toString());
     button = 1;
@@ -565,21 +595,33 @@ function result() {
   index = [];
   index[0] = indexOut;
 
+  var temp = 0;
+  var indexBack = indexOut;
   var k = Math.floor(indexOut);
-  b = indexOut.toString().length;
-
   if (k != indexOut) {
-    if (indexOut.toString().length > 9) {
-      let whole = k.toString().length;
-      whole = (9 - whole);
-      indexOut = indexOut.toFixed(whole);
-    }
-  } else if (b >= 10 && decimal > 0) {
+    var localOut = indexOut
+    b = indexOut.toString().length;
+    do {
+      b--;
+      indexOut = indexOut.toString();
+      k = indexOut.toString()[b];
+      if (k == ".") {
+        temp = indexOut.slice(0, b);
+        temp = temp.toLocaleString();
+        indexOut = (temp + localOut.toString().slice(b, localOut.toString().length));
+        console.log(indexOut);
+      }
+    } while (k != ".")
+    decimal = 10
+  }
+
+  console.log(indexOut);
+console.log(indexBack);
+  if (indexBack > 999999999) {
     indexOut = indexOut.toExponential(4);
-  } else if (b > 9) {
-    indexOut = indexOut.toExponential(4);
-  } else if (b > 3) {
-    indexOut = indexOut.toLocaleString();
+  } else if (indexBack.toString().length > 9) {
+    indexBack = indexBack.toLocaleString();
+    indexOut = indexBack;
   }
 
   var one = document.getElementById("output");
@@ -606,6 +648,8 @@ function dot() {
   if (decimal < 0) {
     decimal = 0;
     indexOut = variableV1.toLocaleString();
+    variableV1 = variableV1.toString();
+    variableV1 = variableV1 + ".0";
     indexOut = (indexOut + ".0");
     var one = document.getElementById("output");
     one.innerHTML = indexOut;
@@ -615,13 +659,9 @@ function dot() {
 function percentage() {
     indexOut = index;
     console.log(indexOut);
-  if (decimal >= 0 && isaac != 1) {
-    variableV1 = variableV1 / Math.pow(10, decimal);
-    decimal = -1;
-  }else {
-    isaac = 0
+
     variableV1 = Number(variableV1);
-  }
+
   if (index.length < 1) {
     console.log(indexOut, index);
     variableV1 = (variableV1 / 100);
@@ -677,13 +717,7 @@ function percentage() {
 function negate() {
   negation = 1;
 
-  if (decimal >= 0 && isaac != 1) {
-    variableV1 = variableV1 / Math.pow(10, decimal);
-    decimal = -1;
-  }else {
-    isaac = 0
     variableV1 = Number(variableV1);
-  }
 
   variableV1 = (variableV1 - (variableV1 * 2))
   indexOut = variableV1;
